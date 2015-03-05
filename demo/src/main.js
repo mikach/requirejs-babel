@@ -1,4 +1,4 @@
-define(['es6!src/sum'], function(sum) {
+define(['es6!src/sum'], (sum) => {
     console.log( sum(1,2) );
 
     class A {

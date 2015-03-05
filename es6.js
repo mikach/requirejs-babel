@@ -18,7 +18,9 @@ define(['babel'], function(babel) {
                 code;
 
             fetchText(url, function (text) {
-                code = babel.transform(text).code;
+                code = babel.transform(text, {
+                    sourceMap: 'inline'
+                }).code;
                 onload.fromText(code);
             });
         }
