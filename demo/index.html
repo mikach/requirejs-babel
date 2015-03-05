@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script src="libs/requirejs.min.js"></script>
+    <script>
+        requirejs.config({
+            paths: {
+                'es6': '../es6',
+                'babel': '../babel-4.6.6.min'
+            }
+        });
+
+        require(['es6!src/main']);
+    </script
+</body>
+</html>
