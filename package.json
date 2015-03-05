@@ -1,11 +1,11 @@
 {
   "name": "requirejs-babel",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "An AMD loader plugin for Babel",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Michael <mikach27@gmail.com>",
   "license": "MIT"
 }
