@@ -29,4 +29,3 @@ Reference files via the es6! plugin name:
     // ...
   });
 ```
-

@@ -5,17 +5,17 @@
     <title>Document</title>
 </head>
 <body>
-    
+    Open console tab in dev tools!
+
     <script src="libs/requirejs.min.js"></script>
     <script>
         requirejs.config({
             paths: {
-                'es6': '../es6',
-                'babel': '../babel-4.6.6.min'
+                es6: '../es6',
+                babel: '../babel-4.6.6.min'
             }
         });
-
-        require(['es6!src/main']);
-    </script
+    </script>
+    <script src="src/index.js"></script>
 </body>
 </html>
