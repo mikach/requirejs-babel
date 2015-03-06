@@ -1,12 +1,8 @@
-var getXhr, fetchText, _buildMap = {};
+var fetchText, _buildMap = {};
 
 if (typeof window !== "undefined" && window.navigator && window.document) {
-    getXhr = function () {
-        return new XMLHttpRequest();
-    };
-
     fetchText = function (url, callback) {
-        var xhr = getXhr();
+        var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
         xhr.onreadystatechange = function (evt) {
             //Do not explicitly handle errors, those should be
@@ -17,7 +13,6 @@ if (typeof window !== "undefined" && window.navigator && window.document) {
         };
         xhr.send(null);
     };
-
 } else if (typeof process !== "undefined" &&
            process.versions &&
            !!process.versions.node) {
@@ -31,11 +26,11 @@ if (typeof window !== "undefined" && window.navigator && window.document) {
 define(['babel'], function(babel) {
     return {
         load: function (name, req, onload, config) {
-            var url = req.toUrl(name + '.js'),
-                code;
+            var url = req.toUrl(name + '.js');
 
             fetchText(url, function (text) {
-                code = babel.transform(text, {
+                var code = babel.transform(text, {
+                    modules: 'amd',
                     sourceMap: 'inline'
                 }).code;
 
