@@ -1,11 +1,11 @@
-define(['es6!src/sum'], (sum) => {
-    console.log( sum(1,2) );
+import sum from 'es6!src/sum';
 
-    class A {
-        constructor(a) {
-            console.log('Hello ' + a);
-        }
+console.log( sum(1,2) );
+
+class A {
+    constructor(a) {
+        console.log('Hello ' + a);
     }
+}
 
-    new A('world!');
-});
+new A('world!');
