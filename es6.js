@@ -31,7 +31,8 @@ define(['babel'], function(babel) {
             fetchText(url, function (text) {
                 var code = babel.transform(text, {
                     modules: 'amd',
-                    sourceMap: 'inline'
+                    sourceMap: config.isBuild ? false :'inline',
+                    sourceFileName: name
                 }).code;
 
                 if (config.isBuild) {
