@@ -1,5 +1,6 @@
 var fetchText, _buildMap = {};
 
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
 if (typeof window !== "undefined" && window.navigator && window.document) {
     fetchText = function (url, callback) {
         var xhr = new XMLHttpRequest();
@@ -22,10 +23,20 @@ if (typeof window !== "undefined" && window.navigator && window.document) {
         callback(fs.readFileSync(path, 'utf8'));
     };
 }
+//>>excludeEnd('excludeBabel')
 
-define(['babel'], function(babel) {
+define([
+    //>>excludeStart('excludeBabel', pragmas.excludeBabel)
+    'babel'
+    //>>excludeEnd('excludeBabel')
+], function(
+    //>>excludeStart('excludeBabel', pragmas.excludeBabel)
+    babel
+    //>>excludeEnd('excludeBabel')
+    ) {
     return {
         load: function (name, req, onload, config) {
+            //>>excludeStart('excludeBabel', pragmas.excludeBabel)
             var url = req.toUrl(name + '.js');
 
             fetchText(url, function (text) {
@@ -41,11 +52,11 @@ define(['babel'], function(babel) {
 
                 onload.fromText(code);    
             });
+            //>>excludeEnd('excludeBabel')
         },
 
         write: function (pluginName, moduleName, write) {
             if (moduleName in _buildMap) {
-                // var text = jsEscape(buildMap[moduleName]);
                 write.asModule(pluginName + '!' + moduleName, _buildMap[moduleName]);
             }
         }

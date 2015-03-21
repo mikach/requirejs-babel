@@ -1,6 +1,6 @@
 {
   "name": "requirejs-babel",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An AMD loader plugin for Babel",
   "repository": {
     "type": "git",
@@ -8,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "optimize": "r.js -o baseUrl=./demo paths.es6=../es6 paths.babel=../babel-4.6.6.min name=src/index out=demo/main-built.js optimize=none",
+    "optimize": "r.js -o demo/build.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael <mikach27@gmail.com>",
