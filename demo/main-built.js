@@ -2,8 +2,10 @@ var fetchText, _buildMap = {};
 
 
 define('es6',[
-    ], function(
-        ) {
+        'module'
+], function(
+        _module
+    ) {
     return {
         load: function (name, req, onload, config) {
                     },
@@ -18,7 +20,7 @@ define('es6',[
 
 
 define('es6!src/sum',["exports", "module"], function (exports, module) {
-  
+  "use strict";
 
   module.exports = function (a, b) {
     return a + b;
@@ -26,7 +28,7 @@ define('es6!src/sum',["exports", "module"], function (exports, module) {
 });
 
 define('es6!src/class',["exports", "es6!src/sum"], function (exports, _es6SrcSum) {
-    
+    "use strict";
 
     var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
 
