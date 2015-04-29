@@ -10,6 +10,13 @@
     <script src="libs/requirejs.min.js"></script>
     <script>
         requirejs.config({
+            config: {
+              es6: {
+                resolveModuleSource: function(source) {
+                  return 'es6!'+source;
+                }
+              }
+            },
             paths: {
                 es6: '../es6',
                 babel: '../babel-4.6.6.min'

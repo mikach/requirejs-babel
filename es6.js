@@ -27,30 +27,41 @@ if (typeof window !== "undefined" && window.navigator && window.document) {
 
 define([
     //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-    'babel'
+    'babel',
     //>>excludeEnd('excludeBabel')
+    'module'
 ], function(
     //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-    babel
+    babel,
     //>>excludeEnd('excludeBabel')
+    _module
     ) {
     return {
         load: function (name, req, onload, config) {
             //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-            var url = req.toUrl(name + '.js');
-
-            fetchText(url, function (text) {
-                var code = babel.transform(text, {
+            function applyOptions(options) {
+                var defaults = {
                     modules: 'amd',
                     sourceMap: config.isBuild ? false :'inline',
                     sourceFileName: name
-                }).code;
+                };
+                for(var key in options) {
+                    if(options.hasOwnProperty(key)) {
+                        defaults[key] = options[key];
+                    }
+                }
+                return defaults;
+            }
+            var url = req.toUrl(name + '.js');
+
+            fetchText(url, function (text) {
+                var code = babel.transform(text, applyOptions(_module.config())).code;
 
                 if (config.isBuild) {
                     _buildMap[name] = code;
                 }
 
-                onload.fromText(code);    
+                onload.fromText(code); 
             });
             //>>excludeEnd('excludeBabel')
         },

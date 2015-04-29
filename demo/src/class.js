@@ -1,4 +1,4 @@
-import sum from 'es6!src/sum';
+import sum from 'src/sum';
 
 console.log( sum(1,2) );
 
