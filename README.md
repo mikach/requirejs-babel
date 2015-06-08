@@ -8,7 +8,7 @@ Installation
 
 ```
   $ npm install -g bower
-  $ bower install requirejs-babel
+  $ bower install https://github.com/hipertracker/requirejs-babel
 ```
 
 Usage
@@ -18,8 +18,8 @@ Add the paths to configuration:
 
 ```javascript
   paths: {
-    es6: '...path_to_bower/requirejse-babel/es6',
-    babel: '...path_to_bower/requirejse-babel/babel-4.6.6.min'
+    es6: '...path_to_bower/requirejs-babel/es6',
+    babel: '...path_to_bower/requirejs-babel/babel.min'
   }
 ```
 
