@@ -1,6 +1,6 @@
 {
   "name": "requirejs-babel",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An AMD loader plugin for Babel",
   "repository": {
     "type": "git",
@@ -14,6 +14,6 @@
   "author": "Michael <mikach27@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "requirejs": "^2.1.17"
+    "requirejs": "^2.1.18"
   }
 }
