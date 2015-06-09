@@ -1,17 +1,17 @@
 {
   "name": "requirejs-babel",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "An AMD loader plugin for Babel",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikach/requirejs-babel"
+    "url": "https://github.com/hipertracker/requirejs-babel"
   },
   "main": "index.js",
   "scripts": {
     "optimize": "r.js -o demo/build.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Michael <mikach27@gmail.com>",
+  "author": "Jaroslaw Zabiello <hipertracker@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "requirejs": "^2.1.18"

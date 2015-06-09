@@ -43,7 +43,8 @@ define([
                 var code = babel.transform(text, {
                     modules: 'amd',
                     sourceMap: config.isBuild ? false :'inline',
-                    sourceFileName: name
+                    sourceFileName: name,
+                    stage: 1
                 }).code;
 
                 if (config.isBuild) {
