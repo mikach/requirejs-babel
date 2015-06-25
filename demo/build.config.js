@@ -5,7 +5,7 @@
     'out': 'main-built.js',
 
     'paths': {
-        'babel': '../babel.min',
+        'babel': '../browser.min',
         'es6': '../es6'
     },
 

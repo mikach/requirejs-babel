@@ -2,8 +2,10 @@ var fetchText, _buildMap = {};
 
 
 define('es6',[
-    ], function(
-        ) {
+        'module'
+], function(
+        _module
+    ) {
     return {
         load: function (name, req, onload, config) {
                     },
@@ -28,13 +30,13 @@ define('es6!src/sum',["exports", "module"], function (exports, module) {
 define('es6!src/class',['exports', 'es6!src/sum'], function (exports, _es6SrcSum) {
     'use strict';
 
-    var _interopRequire = function (obj) { return obj && obj.__esModule ? obj['default'] : obj; };
+    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-    var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } };
+    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-    var _sum = _interopRequire(_es6SrcSum);
+    var _sum = _interopRequireDefault(_es6SrcSum);
 
-    console.log(_sum(1, 2));
+    console.log((0, _sum['default'])(1, 2));
 
     var A = function A(a) {
         _classCallCheck(this, A);

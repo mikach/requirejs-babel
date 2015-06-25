@@ -1,8 +1,8 @@
 {
   "name": "requirejs-babel",
-  "version": "0.0.5",
+  "version": "0.2.0",
   "authors": [
-    "Michael <mikach27@gmail.com>"
+    "Jaroslaw Zabiello <hipertracker@gmail.com>"
   ],
   "description": "An AMD loader plugin for Babel",
   "main": "es6.js",

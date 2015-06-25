@@ -294,20 +294,21 @@
   };
 
   babelHelpers._extends = Object.assign || function (target) {
-        for (var i = 1; i < arguments.length; i++) {
-          var source = arguments[i];
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
 
-          for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-              target[key] = source[key];
-            }
-          }
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
         }
+      }
+    }
 
-        return target;
-      };
+    return target;
+  };
 
   babelHelpers.get = function get(object, property, receiver) {
+    if (object === null) object = Function.prototype;
     var desc = Object.getOwnPropertyDescriptor(object, property);
 
     if (desc === undefined) {
