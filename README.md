@@ -17,7 +17,7 @@ Add the paths and shim to configuration:
 
 ```javascript
     paths: {
-        babel: 'vendor/requirejs-babel/babel',
+        babel: 'vendor/requirejs-babel/browser',
         babel_polyfill: 'vendor/requirejs-babel/polyfill.min',
         es6: 'vendor/requirejs-babel/es6'
     },
