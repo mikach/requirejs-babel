@@ -163,10 +163,8 @@
     }
   };
 
-  babelHelpers.slicedToArray = function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
+  babelHelpers.slicedToArray = (function () {
+    function sliceIterator(arr, i) {
       var _arr = [];
       var _n = true;
       var _d = false;
@@ -190,10 +188,18 @@
       }
 
       return _arr;
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
     }
-  };
+
+    return function (arr, i) {
+      if (Array.isArray(arr)) {
+        return arr;
+      } else if (Symbol.iterator in Object(arr)) {
+        return sliceIterator(arr, i);
+      } else {
+        throw new TypeError("Invalid attempt to destructure non-iterable instance");
+      }
+    };
+  })();
 
   babelHelpers.slicedToArrayLoose = function (arr, i) {
     if (Array.isArray(arr)) {
@@ -230,12 +236,18 @@
   babelHelpers.bind = Function.prototype.bind;
 
   babelHelpers.defineProperty = function (obj, key, value) {
-    return Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
   };
 
   babelHelpers.asyncToGenerator = function (fn) {
