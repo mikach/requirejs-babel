@@ -1,4 +1,4 @@
-Babel (6to5) Plugin
+Babel Plugin
 ===
 
 A [Babel](https://babeljs.io/) loader plugin for [RequireJS](http://requirejs.org).
@@ -6,26 +6,43 @@ A [Babel](https://babeljs.io/) loader plugin for [RequireJS](http://requirejs.or
 Installation
 ---
 
-```
-  $ npm install -g bower
-  $ bower install https://github.com/hipertracker/requirejs-babel
+```bash
+npm install hipertracker/requirejs-babel
 ```
 
 Usage
 ---
 
-Add the paths to configuration:
+Add the paths and shim to configuration:
 
 ```javascript
-  paths: {
-    es6: '...path_to_bower/requirejs-babel/es6',
-    babel: '...path_to_bower/requirejs-babel/babel.min'
-  }
+    paths: {
+        babel: 'vendor/requirejs-babel/babel',
+        babel_polyfill: 'vendor/requirejs-babel/polyfill.min',
+        es6: 'vendor/requirejs-babel/es6'
+    },
+    shim: {
+        babel: {
+            deps: ['babel_polyfill']
+        }
 ```
 
-Reference files via the es6! plugin name:
+Reference files via the `es6!` plugin name:
+
+new ES6 syntax (better)
 ```javascript
-  define(['es6!your-es6-module'], function(module) {
+import MyEs6Module from 'es6!./my-es6-module'
+```
+or plain old AMD syntax:
+
+```javascript
+  define(['es6!./my-es6-module'], function(MyEs6Module) {
     // ...
   });
+```
+
+```html
+....
+<script src="./requirejs-config.js"></script>
+<script src="./vendor/requirejs/require.js" data-main="es6!./src/main" ></script>
 ```
