@@ -1,5 +1,5 @@
-Babel Plugin
-===
+# Babel Plugin for RequireJS
+
 
 A [Babel](https://babeljs.io/) loader plugin for [RequireJS](http://requirejs.org).
 
@@ -10,8 +10,8 @@ Installation
 npm install hipertracker/requirejs-babel
 ```
 
-Usage
----
+## Usage
+
 
 Add the paths and shim to configuration:
 
@@ -46,3 +46,7 @@ or plain old AMD syntax:
 <script src="./requirejs-config.js"></script>
 <script src="./vendor/requirejs/require.js" data-main="es6!./src/main" ></script>
 ```
+
+## Example of React & RequireJS & Babel with ES6+ 
+
+* [https://github.com/hipertracker/react-requirejs-boilerplate](https://github.com/hipertracker/react-requirejs-boilerplate)
