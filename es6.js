@@ -44,7 +44,7 @@ define([
                     modules: 'amd',
                     sourceMap: config.isBuild ? false :'inline',
                     sourceFileName: name,
-                    stage: 1
+                    stage: 0
                 };
                 for(var key in options) {
                     if(options.hasOwnProperty(key)) {
