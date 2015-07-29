@@ -14,7 +14,7 @@
         configurable: true
       }
     });
-    if (superClass) subClass.__proto__ = superClass;
+    if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
   };
 
   babelHelpers.defaults = function (obj, defaults) {
@@ -101,7 +101,7 @@
       delete descriptor.decorators;
       descriptor.enumerable = true;
       descriptor.configurable = true;
-      descriptor.writable = true;
+      if ("value" in descriptor || descriptor.initializer) descriptor.writable = true;
 
       if (decorators) {
         for (var f = 0; f < decorators.length; f++) {

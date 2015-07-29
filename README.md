@@ -46,6 +46,9 @@ or plain old AMD syntax:
 <script src="./requirejs-config.js"></script>
 <script src="./vendor/requirejs/require.js" data-main="es6!./src/main" ></script>
 ```
+## Credits
+
+* [https://github.com/mikach/requirejs-babel](https://github.com/mikach/requirejs-babel)
 
 ## Example of React & RequireJS & Babel with ES6+ 
 
