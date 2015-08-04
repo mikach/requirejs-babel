@@ -132,7 +132,7 @@
 
     for (var _key in _descriptor) descriptor[_key] = _descriptor[_key];
 
-    descriptor.value = descriptor.initializer.call(target);
+    descriptor.value = descriptor.initializer ? descriptor.initializer.call(target) : undefined;
     Object.defineProperty(target, key, descriptor);
   };
 
@@ -278,6 +278,12 @@
     };
   };
 
+  babelHelpers.interopExportWildcard = function (obj, defaults) {
+    var newObj = defaults({}, obj);
+    delete newObj["default"];
+    return newObj;
+  };
+
   babelHelpers.interopRequireWildcard = function (obj) {
     if (obj && obj.__esModule) {
       return obj;
@@ -364,6 +370,12 @@
     }
 
     return value;
+  };
+
+  babelHelpers.newArrowCheck = function (innerThis, boundThis) {
+    if (innerThis !== boundThis) {
+      throw new TypeError("Cannot instantiate an arrow function");
+    }
   };
 
   babelHelpers.classCallCheck = function (instance, Constructor) {
