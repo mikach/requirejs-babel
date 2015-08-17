@@ -20,31 +20,31 @@ define('es6',[
 
 
 define('es6!src/sum',["exports", "module"], function (exports, module) {
-  "use strict";
+  
 
   module.exports = function (a, b) {
     return a + b;
   };
 });
 
-define('es6!src/class',["exports", "es6!src/sum"], function (exports, _es6SrcSum) {
-    "use strict";
+define('es6!src/class',['exports', 'es6!src/sum'], function (exports, _es6SrcSum) {
+    
 
-    var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+    function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-    var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
+    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-    var sum = _interopRequire(_es6SrcSum);
+    var _sum = _interopRequireDefault(_es6SrcSum);
 
-    console.log(sum(1, 2));
+    console.log((0, _sum['default'])(1, 2));
 
     var A = function A(a) {
         _classCallCheck(this, A);
 
-        console.log("Hello " + a);
+        console.log('Hello ' + a);
     };
 
-    new A("world!");
+    new A('world!');
 });
 require(['es6!src/class']);
 define("src/index", function(){});

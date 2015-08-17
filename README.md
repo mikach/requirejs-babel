@@ -19,7 +19,7 @@ Add the paths to configuration:
 ```javascript
   paths: {
     es6: '...path_to_bower/requirejs-babel/es6',
-    babel: '...path_to_bower/requirejs-babel/babel-4.6.6.min'
+    babel: '...path_to_bower/requirejs-babel/babel-5.8.22.min'
   }
 ```
 
