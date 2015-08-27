@@ -43,7 +43,7 @@ define([
                 var defaults = {
                     modules: 'amd',
                     sourceMap: config.isBuild ? false :'inline',
-                    sourceFileName: name
+                    sourceFileName: name + '.js'
                 };
                 for(var key in options) {
                     if(options.hasOwnProperty(key)) {
