@@ -20,7 +20,7 @@ define('es6',[
 
 
 define('es6!src/sum',["exports", "module"], function (exports, module) {
-  
+  "use strict";
 
   module.exports = function (a, b) {
     return a + b;
@@ -28,7 +28,7 @@ define('es6!src/sum',["exports", "module"], function (exports, module) {
 });
 
 define('es6!src/class',['exports', 'es6!src/sum'], function (exports, _es6SrcSum) {
-    
+    'use strict';
 
     function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
