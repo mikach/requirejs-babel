@@ -5,7 +5,7 @@
     'out': 'main-built.js',
 
     'paths': {
-        'babel': '../babel-5.8.22.min',
+        'babel': '../babel-5.8.34.min',
         'es6': '../es6'
     },
 
