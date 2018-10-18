@@ -1,19 +1,52 @@
 {
-  "name": "requirejs-babel",
-  "version": "0.0.9",
+  "_from": "requirejs-babel@0.0.9",
+  "_id": "requirejs-babel@0.0.9",
+  "_inBundle": false,
+  "_integrity": "sha1-jtNyjwHSMB/7x3Ce7UA+X0fDYnw=",
+  "_location": "/requirejs-babel",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "requirejs-babel@0.0.9",
+    "name": "requirejs-babel",
+    "escapedName": "requirejs-babel",
+    "rawSpec": "0.0.9",
+    "saveSpec": null,
+    "fetchSpec": "0.0.9"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/requirejs-babel/-/requirejs-babel-0.0.9.tgz",
+  "_shasum": "8ed3728f01d2301ffbc7709eed403e5f47c3627c",
+  "_spec": "requirejs-babel@0.0.9",
+  "_where": "/Users/devinrhode2/repos/adobe_sales_enablement",
+  "author": {
+    "name": "Michael",
+    "email": "mikach27@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/mikach/requirejs-babel/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
   "description": "An AMD loader plugin for Babel",
+  "devDependencies": {
+    "requirejs": "^2.1.16"
+  },
+  "homepage": "https://github.com/mikach/requirejs-babel#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "requirejs-babel",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikach/requirejs-babel"
+    "url": "git+https://github.com/mikach/requirejs-babel.git"
   },
-  "main": "index.js",
   "scripts": {
     "optimize": "r.js -o demo/build.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Michael <mikach27@gmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "requirejs": "^2.1.16"
-  }
+  "version": "0.0.9"
 }

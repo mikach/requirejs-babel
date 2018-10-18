@@ -1,0 +1,11 @@
+{
+  "note1": "this package.json only exists to allow eslint to work",
+  "name": "adobe_sales_enablement",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.1.0",
+    "requirejs-babel": "0.0.9"
+  }
+}
