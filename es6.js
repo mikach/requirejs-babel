@@ -1,6 +1,6 @@
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
 var fetchText, _buildMap = {};
 
-//>>excludeStart('excludeBabel', pragmas.excludeBabel)
 if (typeof window !== "undefined" && window.navigator && window.document) {
     fetchText = function (url, callback) {
         var xhr = new XMLHttpRequest();
@@ -26,36 +26,61 @@ if (typeof window !== "undefined" && window.navigator && window.document) {
 //>>excludeEnd('excludeBabel')
 
 define([
-    //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-    'babel',
-    //>>excludeEnd('excludeBabel')
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+    'babel', 'babel-plugin-module-resolver',
     'module'
+//>>excludeEnd('excludeBabel')
 ], function(
-    //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-    babel,
-    //>>excludeEnd('excludeBabel')
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+    babel, moduleResolver,
     _module
+//>>excludeEnd('excludeBabel')
     ) {
-    return {
-        load: function (name, req, onload, config) {
-            //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-            function applyOptions(options) {
-                var defaults = {
-                    modules: 'amd',
-                    sourceMap: config.isBuild ? false :'inline',
-                    sourceFileName: name + '.js'
-                };
-                for(var key in options) {
-                    if(options.hasOwnProperty(key)) {
-                        defaults[key] = options[key];
-                    }
-                }
-                return defaults;
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+        babel.registerPlugin('module-resolver', moduleResolver);
+
+        function resolvePath (sourcePath) {
+            if (sourcePath.indexOf('!') < 0) {
+                return 'es6!' + sourcePath;
             }
-            var url = req.toUrl(name + '.js');
+        }
+        var excludedOptions = ['extraPlugins', 'resolveModuleSource'];
+        var pluginOptions = _module.config();
+        var fileExtension = pluginOptions.fileExtension || '.js';
+        var options = {
+            plugins: (pluginOptions.extraPlugins || []).concat([
+                'transform-modules-amd',
+                [
+                    'module-resolver',
+                    {
+                        resolvePath: pluginOptions.resolveModuleSource || resolvePath
+                    }
+                ]
+            ])
+        };
+        for (var key in pluginOptions) {
+            if (pluginOptions.hasOwnProperty(key) && excludedOptions.indexOf(key) < 0) {
+                options[key] = pluginOptions[key];
+            }
+        }
+
+//>>excludeEnd('excludeBabel')
+return {
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+        load: function (name, req, onload, config) {
+            var sourceFileName = name + fileExtension;
+            var url = req.toUrl(sourceFileName);
+
+            options.sourceFileName = sourceFileName;
+            options.sourceMap = config.isBuild ? false : 'inline';
 
             fetchText(url, function (text) {
-                var code = babel.transform(text, applyOptions(_module.config())).code;
+                var code;
+                try {
+                    code = babel.transform(text, options).code;
+                } catch (error) {
+                    return onload.error(error);
+                }
 
                 if (config.isBuild) {
                     _buildMap[name] = code;
@@ -63,7 +88,6 @@ define([
 
                 onload.fromText(code); 
             });
-            //>>excludeEnd('excludeBabel')
         },
 
         write: function (pluginName, moduleName, write) {
@@ -71,5 +95,6 @@ define([
                 write.asModule(pluginName + '!' + moduleName, _buildMap[moduleName]);
             }
         }
-    }
+//>>excludeEnd('excludeBabel')
+    };
 });

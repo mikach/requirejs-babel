@@ -8,12 +8,23 @@
   },
   "main": "index.js",
   "scripts": {
-    "optimize": "r.js -o demo/build.config.js",
+    "prepare": "npm run generate && npm run optimize",
+    "generate": "babel-external-helpers -t var > demo-polyfill/babel-helpers.js",
+    "optimize": "r.js -o demo/build.config.js && r.js -o demo-polyfill/build.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Michael <mikach27@gmail.com>",
   "license": "MIT",
+  "peerDependencies": {
+    "@babel/standalone": "7.x",
+    "babel-plugin-module-resolver-standalone": "0.x"
+  },
   "devDependencies": {
-    "requirejs": "^2.1.16"
+    "@babel/cli": "7.2.3",
+    "@babel/core": "7.4.0",
+    "@babel/polyfill": "7.4.0",
+    "@babel/standalone": "7.4.2",
+    "babel-plugin-module-resolver-standalone": "0.0.1",
+    "requirejs": "^2.3.6"
   }
 }
