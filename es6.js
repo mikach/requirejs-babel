@@ -47,7 +47,7 @@ define([
         var excludedOptions = ['extraPlugins', 'resolveModuleSource'];
         var pluginOptions = _module.config();
         var fileExtension = pluginOptions.fileExtension || '.js';
-        var options = {
+        var defaultOptions = {
             plugins: (pluginOptions.extraPlugins || []).concat([
                 'transform-modules-amd',
                 [
@@ -60,7 +60,7 @@ define([
         };
         for (var key in pluginOptions) {
             if (pluginOptions.hasOwnProperty(key) && excludedOptions.indexOf(key) < 0) {
-                options[key] = pluginOptions[key];
+                defaultOptions[key] = pluginOptions[key];
             }
         }
 
@@ -71,6 +71,10 @@ return {
             var sourceFileName = name + fileExtension;
             var url = req.toUrl(sourceFileName);
 
+            var options = {};
+            for (var key in defaultOptions) {
+                options[key] = defaultOptions[key];
+            }
             options.sourceFileName = sourceFileName;
             options.sourceMap = config.isBuild ? false : 'inline';
 
