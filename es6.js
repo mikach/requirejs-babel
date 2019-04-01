@@ -1,30 +1,3 @@
-//>>excludeStart('excludeBabel', pragmas.excludeBabel)
-var fetchText, _buildMap = {};
-
-if (typeof window !== "undefined" && window.navigator && window.document) {
-    fetchText = function (url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function (evt) {
-            //Do not explicitly handle errors, those should be
-            //visible via console output in the browser.
-            if (xhr.readyState === 4) {
-                callback(xhr.responseText);
-            }
-        };
-        xhr.send(null);
-    };
-} else if (typeof process !== "undefined" &&
-           process.versions &&
-           !!process.versions.node) {
-    //Using special require.nodeRequire, something added by r.js.
-    fs = require.nodeRequire('fs');
-    fetchText = function (path, callback) {
-        callback(fs.readFileSync(path, 'utf8'));
-    };
-}
-//>>excludeEnd('excludeBabel')
-
 define([
 //>>excludeStart('excludeBabel', pragmas.excludeBabel)
     'babel', 'babel-plugin-module-resolver',
@@ -37,6 +10,31 @@ define([
 //>>excludeEnd('excludeBabel')
     ) {
 //>>excludeStart('excludeBabel', pragmas.excludeBabel)
+      var fetchText, _buildMap = {};
+
+        if (typeof window !== 'undefined' && window.navigator && window.document) {
+            fetchText = function (url, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function (evt) {
+                    //Do not explicitly handle errors, those should be
+                    //visible via console output in the browser.
+                    if (xhr.readyState === 4) {
+                        callback(xhr.responseText);
+                    }
+                };
+                xhr.send(null);
+            };
+        } else if (typeof process !== 'undefined' &&
+                   process.versions &&
+                   !!process.versions.node) {
+            //Using special require.nodeRequire, something added by r.js.
+            var fs = require.nodeRequire('fs');
+            fetchText = function (path, callback) {
+                callback(fs.readFileSync(path, 'utf8'));
+            };
+        }
+
         babel.registerPlugin('module-resolver', moduleResolver);
 
         function resolvePath (sourcePath) {
