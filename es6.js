@@ -10,7 +10,7 @@ define([
 //>>excludeEnd('excludeBabel')
     ) {
 //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-      var fetchText, _buildMap = {};
+        var fetchText, _buildMap = {};
 
         if (typeof window !== 'undefined' && window.navigator && window.document) {
             fetchText = function (url, callback) {
@@ -68,6 +68,10 @@ return {
         load: function (name, req, onload, config) {
             var sourceFileName = name + fileExtension;
             var url = req.toUrl(sourceFileName);
+
+            if (url.indexOf('empty:') === 0) {
+                return onload();
+            }
 
             var options = {};
             for (var key in defaultOptions) {
