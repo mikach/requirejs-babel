@@ -1,61 +1,92 @@
-var fetchText, _buildMap = {};
-
-//>>excludeStart('excludeBabel', pragmas.excludeBabel)
-if (typeof window !== "undefined" && window.navigator && window.document) {
-    fetchText = function (url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function (evt) {
-            //Do not explicitly handle errors, those should be
-            //visible via console output in the browser.
-            if (xhr.readyState === 4) {
-                callback(xhr.responseText);
-            }
-        };
-        xhr.send(null);
-    };
-} else if (typeof process !== "undefined" &&
-           process.versions &&
-           !!process.versions.node) {
-    //Using special require.nodeRequire, something added by r.js.
-    fs = require.nodeRequire('fs');
-    fetchText = function (path, callback) {
-        callback(fs.readFileSync(path, 'utf8'));
-    };
-}
-//>>excludeEnd('excludeBabel')
-
 define([
-    //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-    'babel',
-    //>>excludeEnd('excludeBabel')
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+    'babel', 'babel-plugin-module-resolver',
     'module'
+//>>excludeEnd('excludeBabel')
 ], function(
-    //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-    babel,
-    //>>excludeEnd('excludeBabel')
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+    babel, moduleResolver,
     _module
+//>>excludeEnd('excludeBabel')
     ) {
-    return {
-        load: function (name, req, onload, config) {
-            //>>excludeStart('excludeBabel', pragmas.excludeBabel)
-            function applyOptions(options) {
-                var defaults = {
-                    modules: 'amd',
-                    sourceMap: config.isBuild ? false :'inline',
-                    sourceFileName: name + '.js'
-                };
-                for(var key in options) {
-                    if(options.hasOwnProperty(key)) {
-                        defaults[key] = options[key];
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+        var fetchText, _buildMap = {};
+
+        if (typeof window !== 'undefined' && window.navigator && window.document) {
+            fetchText = function (url, callback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function (evt) {
+                    //Do not explicitly handle errors, those should be
+                    //visible via console output in the browser.
+                    if (xhr.readyState === 4) {
+                        callback(xhr.responseText);
                     }
-                }
-                return defaults;
+                };
+                xhr.send(null);
+            };
+        } else if (typeof process !== 'undefined' &&
+                   process.versions &&
+                   !!process.versions.node) {
+            //Using special require.nodeRequire, something added by r.js.
+            var fs = require.nodeRequire('fs');
+            fetchText = function (path, callback) {
+                callback(fs.readFileSync(path, 'utf8'));
+            };
+        }
+
+        babel.registerPlugin('module-resolver', moduleResolver);
+
+        function resolvePath (sourcePath) {
+            if (sourcePath.indexOf('!') < 0) {
+                return 'es6!' + sourcePath;
             }
-            var url = req.toUrl(name + '.js');
+        }
+        var excludedOptions = ['extraPlugins', 'resolveModuleSource'];
+        var pluginOptions = _module.config();
+        var fileExtension = pluginOptions.fileExtension || '.js';
+        var defaultOptions = {
+            plugins: (pluginOptions.extraPlugins || []).concat([
+                'transform-modules-amd',
+                [
+                    'module-resolver',
+                    {
+                        resolvePath: pluginOptions.resolveModuleSource || resolvePath
+                    }
+                ]
+            ])
+        };
+        for (var key in pluginOptions) {
+            if (pluginOptions.hasOwnProperty(key) && excludedOptions.indexOf(key) < 0) {
+                defaultOptions[key] = pluginOptions[key];
+            }
+        }
+
+//>>excludeEnd('excludeBabel')
+return {
+//>>excludeStart('excludeBabel', pragmas.excludeBabel)
+        load: function (name, req, onload, config) {
+            var sourceFileName = name + fileExtension;
+            var url = req.toUrl(sourceFileName);
+
+            if (url.indexOf('empty:') === 0) {
+                return onload();
+            }
+
+            var options = {};
+            for (var key in defaultOptions) {
+                options[key] = defaultOptions[key];
+            }
+            options.sourceFileName = sourceFileName;
+            options.sourceMap = config.isBuild ? false : 'inline';
 
             fetchText(url, function (text) {
-                var code = babel.transform(text, applyOptions(_module.config())).code;
+                var code;
+                try {
+                    code = babel.transform(text, options).code;
+                } catch (error) {
+                    return onload.error(error);
+                }
 
                 if (config.isBuild) {
                     _buildMap[name] = code;
@@ -63,7 +94,6 @@ define([
 
                 onload.fromText(code); 
             });
-            //>>excludeEnd('excludeBabel')
         },
 
         write: function (pluginName, moduleName, write) {
@@ -71,5 +101,6 @@ define([
                 write.asModule(pluginName + '!' + moduleName, _buildMap[moduleName]);
             }
         }
-    }
+//>>excludeEnd('excludeBabel')
+    };
 });

@@ -1,1 +1,5 @@
+demo/main-built.js
+demo-polyfill/babel-helpers.js
+demo-polyfill/main-built.js
+demo-polyfill/main-built.js.map
 node_modules

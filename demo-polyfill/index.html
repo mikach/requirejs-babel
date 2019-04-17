@@ -10,6 +10,12 @@
     <script src="../node_modules/requirejs/require.js"></script>
     <script>
         requirejs.config({
+            config: {
+                es6: {
+                    extraPlugins: ['transform-async-to-generator', 'external-helpers'],
+                    presets: ['es2015']
+                }
+            },
             paths: {
                 es6: '../es6',
                 babel: '../node_modules/@babel/standalone/babel.min',
@@ -17,6 +23,8 @@
             }
         });
     </script>
+    <script src="../node_modules/@babel/polyfill/dist/polyfill.js"></script>
+    <script src="babel-helpers.js"></script>
     <script src="src/index.js"></script>
 </body>
 </html>

@@ -6,9 +6,8 @@ A [Babel](https://babeljs.io/) loader plugin for [RequireJS](http://requirejs.or
 Installation
 ---
 
-```
-  $ npm install -g bower
-  $ bower install requirejs-babel
+```sh
+npm install --save-dev requirejs-babel babel babel-plugin-module-resolver-standalone
 ```
 
 Usage
@@ -18,8 +17,9 @@ Add the paths to configuration:
 
 ```javascript
   paths: {
-    es6: '...path_to_bower/requirejs-babel/es6',
-    babel: '...path_to_bower/requirejs-babel/babel-5.8.22.min'
+    es6: '...node_modules/requirejs-babel/es6',
+    babel: '...node_modules/@babel/standalone/babel.min',
+    'babel-plugin-module-resolver': '...node_modules/babel-plugin-module-resolver-standalone/index'
   }
 ```
 
