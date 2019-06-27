@@ -29,3 +29,17 @@ Reference files via the es6! plugin name:
     // ...
   });
 ```
+
+You could just have an es6 entry point, like this:
+```
+// This file, named /index.js, just points to /src/index.js to start the es6 app.
+require(['es6!src/index']);
+```
+Then class can `import` any other plain es6 js file which uses the `export` syntax!
+
+Your `src/index.js` file might be like
+```
+import a from 'a';
+import b from 'b';
+import c from 'c';
+```
