@@ -37,9 +37,12 @@ define([
 
         babel.registerPlugin('module-resolver', moduleResolver);
 
-        function resolvePath (sourcePath) {
+        function resolvePath (sourcePath, currentFile) {
             if (sourcePath.indexOf('!') < 0) {
-                return 'es6!' + sourcePath;
+                // If sourcePath is relative (ex: "./foo"), it's relative to currentFile.
+                var absSourcePath = /^\.?\.\//.test(sourcePath) ? currentFile.replace(/[^/]*$/, "") + sourcePath :
+                    sourcePath;
+                return 'es6!' + absSourcePath;
             }
         }
         var excludedOptions = ['extraPlugins', 'resolveModuleSource'];
@@ -66,7 +69,7 @@ define([
 return {
 //>>excludeStart('excludeBabel', pragmas.excludeBabel)
         load: function (name, req, onload, config) {
-            var sourceFileName = name + fileExtension;
+            var sourceFileName = /\./.test(name) ? name : name + fileExtension;
             var url = req.toUrl(sourceFileName);
 
             if (url.indexOf('empty:') === 0) {
@@ -92,7 +95,7 @@ return {
                     _buildMap[name] = code;
                 }
 
-                onload.fromText(code); 
+                onload.fromText(code);
             });
         },
 
