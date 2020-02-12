@@ -24,7 +24,7 @@
     "@babel/core": "7.4.0",
     "@babel/polyfill": "7.4.0",
     "@babel/standalone": "7.4.2",
-    "babel-plugin-module-resolver-standalone": "0.0.1",
+    "babel-plugin-module-resolver-standalone": "^0.0.2",
     "requirejs": "^2.3.6"
   }
 }
