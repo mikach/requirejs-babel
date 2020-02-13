@@ -26,5 +26,8 @@
     "@babel/standalone": "7.4.2",
     "babel-plugin-module-resolver-standalone": "0.0.1",
     "requirejs": "^2.3.6"
+  },
+  "dependencies": {
+    "lit-html": "^1.1.2"
   }
 }
