@@ -56,12 +56,12 @@ define([
                 ]
             ])
         };
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
         for (var key in pluginOptions) {
-            if (pluginOptions.hasOwnProperty(key) && excludedOptions.indexOf(key) < 0) {
+            if (hasOwnProperty.call(pluginOptions, key) && excludedOptions.indexOf(key) < 0) {
                 defaultOptions[key] = pluginOptions[key];
             }
         }
-
 //>>excludeEnd('excludeBabel')
 return {
 //>>excludeStart('excludeBabel', pragmas.excludeBabel)
