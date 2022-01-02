@@ -1,11 +1,16 @@
-import sum from 'src/sum';
+import sum from './sum';
+import { html, render } from 'lit-html';
 
 console.log( sum(1,2) );
 
 class A {
     constructor(a) {
-        console.log('Hello ' + a);
+        this.message = 'Hello ' + a;
+        console.log(this.message);
     }
 }
 
-new A('world!');
+const a = new A('world!');
+
+render(html`<br><br>
+${a.message}, 1 + 2 = ${sum(1,2)}!`, document.body);
