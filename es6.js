@@ -66,7 +66,10 @@ define([
 return {
 //>>excludeStart('excludeBabel', pragmas.excludeBabel)
         load: function (name, req, onload, config) {
-            var sourceFileName = name + fileExtension;
+            // Paths relative to the current directory include the file extension.
+            var extensionIndex = name.length - fileExtension.length;
+            var sourceFileName = name.lastIndexOf(fileExtension) === extensionIndex ?
+                                 name : name + fileExtension;
             var url = req.toUrl(sourceFileName);
 
             if (url.indexOf('empty:') === 0) {
